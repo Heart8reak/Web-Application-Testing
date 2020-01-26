@@ -36,6 +36,20 @@ class App extends React.Component {
         inning: this.state.inning + 1
       });
     }
+
+    if (this.state.outs === 3) {
+      this.setState({
+        outs: 0,
+        inning: this.state.inning + 1
+      });
+      if (this.inning % 2 === 0) {
+        document.querySelector('.homescore').classList.toggle('.atbat');
+        document.querySelector('.awayscore').classList.toggle('atbat');
+      } else {
+        document.querySelector('.awayscore').classList.toggle('atbat');
+        document.querySelector('.homescore').classList.toggle('atbat');
+      }
+    }
   };
 
   handleInning = () => {
