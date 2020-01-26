@@ -7,12 +7,14 @@ import Dashboard from './components/Dashboard';
 class App extends React.Component {
   state = {
     strike: 0,
-    ball: 0
+    ball: 0,
+    hits: 0,
+    outs: 0,
+    inning: 0,
+    onBase: 0,
+    homeScore: 0,
+    awayScore: 0
   };
-
-  // strikePlus = currentStrike => {
-  //   return currentStrike + 1;
-  // };
 
   handleStrike = e => {
     e.preventDefault();
@@ -20,20 +22,34 @@ class App extends React.Component {
 
     if (this.state.strike > 1) {
       this.setState({
-        strike: 0
+        strike: 0,
+        outs: this.state.outs + 1
+      });
+    }
+    if (this.state.outs === 3) {
+      this.setState({
+        outs: 0,
+        inning: this.state.inning + 1
       });
     }
   };
 
-  handleBall = e => {
-    e.preventDefault();
+  handleBall = () => {
     this.setState({
       ball: this.state.ball + 1
     });
 
     if (this.state.ball > 2) {
       this.setState({
-        ball: 0
+        ball: 0,
+        onBase: this.state.onBase + 1
+      });
+    }
+
+    if (this.state.onBase === 4) {
+      this.setState({
+        runs: this.state.runs + 1,
+        onBase: 3
       });
     }
   };
@@ -41,8 +57,9 @@ class App extends React.Component {
   handleHit = e => {
     e.preventDefault();
     this.setState({
+      ball: 0,
       strike: 0,
-      ball: 0
+      hits: this.state.hits + 1
     });
   };
 
@@ -64,7 +81,16 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Display strike={this.state.strike} ball={this.state.ball} />
+        <Display
+          strike={this.state.strike}
+          ball={this.state.ball}
+          hits={this.state.hits}
+          outs={this.state.outs}
+          inning={this.state.inning}
+          onBase={this.state.onBase}
+          homeScore={this.state.homeScore}
+          awayScore={this.state.awayScore}
+        />
         <Dashboard
           handleStrike={this.handleStrike}
           handleBall={this.handleBall}
@@ -75,5 +101,4 @@ class App extends React.Component {
     );
   }
 }
-
 export default App;
