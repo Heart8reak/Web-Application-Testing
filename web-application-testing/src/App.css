@@ -9,6 +9,15 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  padding-top: 25px;
+}
+
+.homescore {
+  padding: 1%;
+}
+
+.awayscore {
+  padding: 1%;
 }
 
 .display-bottom {
@@ -35,7 +44,12 @@ button {
   border-radius: 5px;
 }
 
-:atbat {
-  background-color: aqua;
+.atbat {
+  background-color: rgb(96, 214, 169);
+  border: 2px dashed greenyellow;
+}
+
+.toggleBtn {
+  background-color: rgb(96, 214, 169);
   border: 2px dashed greenyellow;
 }

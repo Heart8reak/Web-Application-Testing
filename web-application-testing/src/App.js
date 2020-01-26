@@ -10,26 +10,42 @@ class App extends React.Component {
     ball: 0,
     hits: 0,
     outs: 0,
-    inning: 0,
+    inning: 1,
     onBase: 0,
     homeScore: 0,
-    awayScore: 0
+    awayScore: 0,
+    className: ''
   };
 
   handleStrike = e => {
     e.preventDefault();
     this.setState({ strike: this.state.strike + 1 });
 
-    if (this.state.strike > 1) {
+    if (this.state.strike > 2) {
       this.setState({
         strike: 0,
+        ball: 0,
+        onBase: 0,
         outs: this.state.outs + 1
       });
     }
+
     if (this.state.outs === 3) {
       this.setState({
         outs: 0,
         inning: this.state.inning + 1
+      });
+    }
+  };
+
+  handleInning = () => {
+    if (this.state.inning + 1) {
+      this.setState({
+        className: 'homescore'
+      });
+    } else {
+      this.setState({
+        className: 'atbat'
       });
     }
   };
@@ -42,13 +58,14 @@ class App extends React.Component {
     if (this.state.ball > 2) {
       this.setState({
         ball: 0,
+        strike: 0,
         onBase: this.state.onBase + 1
       });
     }
 
     if (this.state.onBase === 4) {
       this.setState({
-        runs: this.state.runs + 1,
+        homeScore: this.state.homeScore + 1,
         onBase: 3
       });
     }
@@ -96,6 +113,7 @@ class App extends React.Component {
           handleBall={this.handleBall}
           handleHit={this.handleHit}
           handleFoul={this.handleFoul}
+          handleInning={this.handleInning}
         />
       </div>
     );

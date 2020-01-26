@@ -4,14 +4,14 @@ const Display = props => {
   console.log(props);
   return (
     <div className="display-top">
-      <div className="score">
+      <div className="homescore atbat">
         <h1>Home: {props.homeScore}</h1>
       </div>
 
       <h3>Strike: {props.strike}</h3>
       <h3>Balls: {props.ball}</h3>
 
-      <div className="score">
+      <div className="awayscore">
         <h1>Away: {props.awayScore}</h1>
       </div>
 
